@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu Alchemist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚗️</text></svg>" />
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="brand">
+      <span class="brand-mark">⚗️</span>
+      <h1>Menu Alchemist</h1>
+    </div>
+    <p class="tagline">Point it at any drink on a menu — get the recipe and what to buy.</p>
+  </header>
+
+  <main>
+    <!-- Input panel -->
+    <section class="card input-card" id="input-card">
+      <form id="analyze-form" novalidate>
+        <div class="dropzone" id="dropzone" tabindex="0" role="button"
+             aria-label="Upload a photo of the drink or menu">
+          <input type="file" id="image-input" accept="image/jpeg,image/png,image/webp" hidden />
+          <div class="dropzone-idle" id="dropzone-idle">
+            <div class="dropzone-icon">📷</div>
+            <p><strong>Drop a photo</strong> or click to browse</p>
+            <p class="hint">A shot of the drink itself, or of the menu — JPEG, PNG, WebP</p>
+          </div>
+          <div class="dropzone-preview hidden" id="dropzone-preview">
+            <img id="preview-img" alt="Selected drink photo" />
+            <button type="button" class="clear-image" id="clear-image" aria-label="Remove photo">✕</button>
+          </div>
+        </div>
+
+        <label class="field">
+          <span>Drink name</span>
+          <input type="text" id="name-input" placeholder="e.g. Midnight in Oaxaca" maxlength="200" required />
+        </label>
+
+        <label class="field">
+          <span>Menu description <em>(optional, but helps a lot)</em></span>
+          <textarea id="description-input" rows="3" maxlength="2000"
+            placeholder="e.g. mezcal, amaro, chocolate bitters, smoked rosemary…"></textarea>
+        </label>
+
+        <button type="submit" class="transmute-btn" id="submit-btn">
+          <span class="btn-label">Transmute</span>
+        </button>
+      </form>
+    </section>
+
+    <!-- Loading state -->
+    <section class="card loading-card hidden" id="loading-card" aria-live="polite">
+      <div class="alembic">⚗️</div>
+      <p class="loading-message" id="loading-message">Consulting the grimoire…</p>
+    </section>
+
+    <!-- Results -->
+    <section class="results hidden" id="results">
+      <div class="card recipe-card">
+        <div class="recipe-header">
+          <h2 id="r-name"></h2>
+          <span class="confidence-badge" id="r-confidence"></span>
+        </div>
+        <p class="recipe-summary" id="r-summary"></p>
+        <div class="meta-chips" id="r-chips"></div>
+
+        <h3>Ingredients</h3>
+        <ul class="ingredients" id="r-ingredients"></ul>
+
+        <h3>Method</h3>
+        <ol class="steps" id="r-steps"></ol>
+
+        <div id="r-cues-block" class="hidden">
+          <h3>What the photo revealed</h3>
+          <ul class="cues" id="r-cues"></ul>
+        </div>
+      </div>
+
+      <div class="card buylist-card">
+        <h2>🛒 Buy list</h2>
+        <div id="b-groups"></div>
+        <p class="staples hidden" id="b-staples"></p>
+        <p class="provider-note" id="provider-note"></p>
+      </div>
+    </section>
+
+    <button class="again-btn hidden" id="again-btn" type="button">↺ Analyze another drink</button>
+  </main>
+
+  <div class="toast hidden" id="toast" role="alert"></div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
