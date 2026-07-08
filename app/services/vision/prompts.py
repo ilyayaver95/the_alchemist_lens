@@ -9,6 +9,8 @@ to refine your ingredient and proportion estimates, and record those cues. If on
 the menu is visible, rely on the text and standard recipes for this style of drink.
 
 Rules:
+- The menu may be in any language. Always write the recipe in English, keeping \
+the drink's original name (add a transliteration or translation in parentheses).
 - Produce a single-serving recipe with realistic bar proportions (use oz or ml).
 - List every ingredient including ice, and classify each with the closest category.
 - Mark obvious pantry staples (ice, water, sugar, salt) with is_pantry_staple.
