@@ -2,8 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Menu Alchemist</title>
+  <meta name="theme-color" content="#12100e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Alchemist" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -27,11 +33,11 @@
       <form id="analyze-form" novalidate>
         <div class="dropzone" id="dropzone" tabindex="0" role="button"
              aria-label="Upload a photo of the drink or menu">
-          <input type="file" id="image-input" accept="image/jpeg,image/png,image/webp" hidden />
+          <input type="file" id="image-input" accept="image/*" hidden />
           <div class="dropzone-idle" id="dropzone-idle">
             <div class="dropzone-icon">📷</div>
-            <p><strong>Drop a photo</strong> or click to browse</p>
-            <p class="hint">A shot of the drink itself, or of the menu — JPEG, PNG, WebP</p>
+            <p><strong>Snap or add a photo</strong></p>
+            <p class="hint">A shot of the drink itself, or of the menu</p>
           </div>
           <div class="dropzone-preview hidden" id="dropzone-preview">
             <img id="preview-img" alt="Selected drink photo" />

@@ -39,7 +39,7 @@ body {
 /* ---------- Header ---------- */
 .site-header {
   text-align: center;
-  padding: 3.2rem 1rem 2rem;
+  padding: calc(2.4rem + env(safe-area-inset-top)) 1rem 2rem;
 }
 
 .brand {
@@ -67,7 +67,7 @@ body {
 main {
   max-width: 1060px;
   margin: 0 auto;
-  padding: 0 1.2rem 4rem;
+  padding: 0 1.2rem calc(4rem + env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -370,7 +370,7 @@ main {
 
 .toast {
   position: fixed;
-  bottom: 2rem;
+  bottom: calc(2rem + env(safe-area-inset-bottom));
   left: 50%;
   transform: translateX(-50%);
   background: #3a1f1a;

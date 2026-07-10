@@ -23,12 +23,12 @@ const LOADING_MESSAGES = [
 
 function setFile(file) {
   if (!file) return;
-  if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
-    showToast("Please use a JPEG, PNG, or WebP image.");
+  if (!file.type.startsWith("image/")) {
+    showToast("That doesn't look like an image.");
     return;
   }
-  if (file.size > 10 * 1024 * 1024) {
-    showToast("Image is too large — max 10 MB.");
+  if (file.size > 60 * 1024 * 1024) {
+    showToast("Image is too large.");
     return;
   }
   selectedFile = file;
@@ -70,6 +70,29 @@ document.addEventListener("paste", (e) => {
 
 /* ---------- Submit ---------- */
 
+// Downscale + re-encode as JPEG client-side: keeps uploads small on cellular
+// and converts iPhone HEIC photos into something the backend accepts.
+async function toUploadableJpeg(file, maxDim = 1600) {
+  try {
+    const url = URL.createObjectURL(file);
+    const img = await new Promise((resolve, reject) => {
+      const image = new Image();
+      image.onload = () => resolve(image);
+      image.onerror = reject;
+      image.src = url;
+    });
+    const scale = Math.min(1, maxDim / Math.max(img.naturalWidth, img.naturalHeight));
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.round(img.naturalWidth * scale);
+    canvas.height = Math.round(img.naturalHeight * scale);
+    canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
+    URL.revokeObjectURL(url);
+    const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/jpeg", 0.85));
+    if (blob) return new File([blob], "photo.jpg", { type: "image/jpeg" });
+  } catch { /* fall through to the original file */ }
+  return file;
+}
+
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const name = $("name-input").value.trim();
@@ -77,7 +100,7 @@ form.addEventListener("submit", async (e) => {
   if (!name) return showToast("Give the drink a name — it's on the menu!");
 
   const body = new FormData();
-  body.append("image", selectedFile);
+  body.append("image", await toUploadableJpeg(selectedFile));
   body.append("name", name);
   body.append("description", $("description-input").value.trim());
 
@@ -227,4 +250,10 @@ function showToast(message) {
   toast.classList.remove("hidden");
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => toast.classList.add("hidden"), 5000);
+}
+
+/* ---------- PWA ---------- */
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js"));
 }

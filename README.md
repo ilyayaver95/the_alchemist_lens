@@ -99,6 +99,30 @@ Errors are meaningful: `415` bad file type, `413` too large, `422` undecodable
 image, `429` free-tier quota exhausted (after automatic retries), `502` provider
 failure, `503` provider not configured.
 
+## Use it on your iPhone (PWA)
+
+The web app is installable. Once the backend is reachable from your phone
+(see deployment below), open the URL in Safari, tap **Share → Add to Home
+Screen**, and you get a full-screen app with its own icon. Tapping the photo
+area opens the camera directly; photos are downscaled on-device before upload,
+so it's fast on cellular and iPhone HEIC photos are handled automatically.
+
+## Deploy to Render (free)
+
+The repo contains a `render.yaml` blueprint.
+
+1. Push this repo to GitHub.
+2. Create a free account at [render.com](https://render.com), then
+   **New → Blueprint**, pick the repo, and apply.
+3. When prompted, set `GEMINI_API_KEY` to your key (it's marked `sync: false`,
+   so it lives only in Render's dashboard, never in git).
+4. Open `https://<your-service>.onrender.com` on your iPhone and add it to
+   your home screen.
+
+Free-tier caveat: the server sleeps after ~15 minutes of inactivity, so the
+first request after a while takes up to a minute while it wakes — the app's
+loading state covers this.
+
 ## Tests
 
 ```bash
