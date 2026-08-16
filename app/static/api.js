@@ -13,8 +13,22 @@ function detailOf(body, status) {
   return `Request failed (${status})`;
 }
 
+// The service worker keeps serving the cached shell when the backend is down,
+// so the app looks alive while every call fails. Left alone, fetch's own
+// "Failed to fetch" surfaces in a toast and tells the user nothing.
+const OFFLINE_MESSAGE =
+  "Can't reach the server — it may be waking up or offline. Try again in a moment.";
+
 async function request(path, options = {}) {
-  const res = await fetch(`${BASE}${path}`, { credentials: "same-origin", ...options });
+  let res;
+  try {
+    res = await fetch(`${BASE}${path}`, { credentials: "same-origin", ...options });
+  } catch (cause) {
+    const error = new Error(OFFLINE_MESSAGE);
+    error.status = 0;
+    error.cause = cause;
+    throw error;
+  }
   if (res.status === 204) return null;
   const body = await res.json().catch(() => null);
   if (!res.ok) {
