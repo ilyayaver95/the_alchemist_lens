@@ -1,7 +1,5 @@
-import asyncio
 import hashlib
 import io
-import json
 import logging
 from pathlib import Path
 
@@ -10,11 +8,10 @@ from PIL import Image, UnidentifiedImageError
 from app.config import Settings
 from app.models.responses import AnalyzeResponse
 from app.services.buy_list import apply_staple_flags, build_buy_list
-from app.services.vision.base import RateLimitError, VisionProvider, VisionProviderError
+from app.services.llm_retry import with_rate_limit_retry
+from app.services.vision.base import VisionProvider, VisionProviderError
 
 logger = logging.getLogger(__name__)
-
-_RETRY_DELAYS_SECONDS = (2.0, 5.0)
 
 
 class InvalidImageError(Exception):
@@ -71,17 +68,6 @@ class RecipeService:
         except OSError:
             logger.warning("Failed to write response cache at %s", path, exc_info=True)
 
-    async def _analyze_with_retry(
-        self, image_bytes: bytes, mime_type: str, drink_name: str, description: str
-    ):
-        for delay in _RETRY_DELAYS_SECONDS:
-            try:
-                return await self._provider.analyze(image_bytes, mime_type, drink_name, description)
-            except RateLimitError:
-                logger.info("Rate limited by %s, retrying in %.0fs", self._provider.name, delay)
-                await asyncio.sleep(delay)
-        return await self._provider.analyze(image_bytes, mime_type, drink_name, description)
-
     async def analyze(self, raw_image: bytes, drink_name: str, description: str) -> AnalyzeResponse:
         image_bytes, mime_type = prepare_image(raw_image, self._settings.max_image_dimension)
 
@@ -90,11 +76,14 @@ class RecipeService:
             logger.info("Cache hit for '%s'", drink_name)
             return cached
 
-        recipe = await self._analyze_with_retry(image_bytes, mime_type, drink_name, description)
+        recipe = await with_rate_limit_retry(
+            lambda: self._provider.analyze(image_bytes, mime_type, drink_name, description),
+            self._provider.name,
+        )
         recipe = apply_staple_flags(recipe)
         response = AnalyzeResponse(
             recipe=recipe,
-            buy_list=build_buy_list(recipe),
+            buy_list=build_buy_list(recipe, self._settings.paneco_base_url),
             provider=self._provider.name,
             model=self._provider.model,
             cached=False,

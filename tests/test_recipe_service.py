@@ -58,7 +58,7 @@ def settings(tmp_path) -> Settings:
 
 
 async def test_retries_on_rate_limit(settings, monkeypatch):
-    monkeypatch.setattr("app.services.recipe_service._RETRY_DELAYS_SECONDS", (0, 0))
+    monkeypatch.setattr("app.services.llm_retry._RETRY_DELAYS_SECONDS", (0, 0))
     provider = FlakyProvider(failures=2)
     service = RecipeService(provider=provider, settings=settings)
     response = await service.analyze(make_image_bytes(), "Margarita", "classic")
@@ -67,7 +67,7 @@ async def test_retries_on_rate_limit(settings, monkeypatch):
 
 
 async def test_rate_limit_surfaces_after_retries_exhausted(settings, monkeypatch):
-    monkeypatch.setattr("app.services.recipe_service._RETRY_DELAYS_SECONDS", (0, 0))
+    monkeypatch.setattr("app.services.llm_retry._RETRY_DELAYS_SECONDS", (0, 0))
     service = RecipeService(provider=FlakyProvider(failures=10), settings=settings)
     with pytest.raises(RateLimitError):
         await service.analyze(make_image_bytes(), "Margarita", "classic")

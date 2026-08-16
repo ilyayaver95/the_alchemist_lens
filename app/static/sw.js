@@ -1,7 +1,25 @@
 /* Network-first service worker: always prefer fresh content, fall back to
    cache so the app shell still opens offline. API calls are never cached. */
-const CACHE = "menu-alchemist-v1";
-const SHELL = ["/", "/styles.css", "/app.js", "/manifest.webmanifest", "/icons/icon-192.png"];
+const CACHE = "menu-alchemist-v2";
+const SHELL = [
+  "/",
+  "/styles.css",
+  "/manifest.webmanifest",
+  "/icons/icon-192.png",
+  "/app.js",
+  "/api.js",
+  "/paneco.js",
+  "/photo-picker.js",
+  "/render.js",
+  "/router.js",
+  "/state.js",
+  "/ui.js",
+  "/views/analyze.js",
+  "/views/auth.js",
+  "/views/bar.js",
+  "/views/classics.js",
+  "/views/favorites.js",
+];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting()));
