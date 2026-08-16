@@ -21,7 +21,7 @@ def make_recipe(ingredients: list[Ingredient]) -> Recipe:
 class TestNormalizeName:
     def test_strips_descriptors(self):
         assert normalize_name("Crushed Ice") == "ice"
-        assert normalize_name("freshly squeezed lime juice") == "squeezed lime juice"
+        assert normalize_name("freshly squeezed lime juice") == "lime juice"
         assert normalize_name("granulated white sugar") == "sugar"
         assert normalize_name("hot water") == "water"
 

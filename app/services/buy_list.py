@@ -6,43 +6,13 @@ unit-tested without any API access.
 
 from app.models.buy_list import BuyList, BuyListGroup, BuyListItem
 from app.models.recipe import Ingredient, IngredientCategory, Recipe
+from app.services import paneco
+from app.services.ingredients import is_pantry_staple, normalize_name
 
-# Words that describe form/preparation, not identity: "crushed ice" -> "ice".
-_DESCRIPTORS = {
-    "fresh",
-    "freshly",
-    "crushed",
-    "cubed",
-    "cracked",
-    "hot",
-    "cold",
-    "warm",
-    "chilled",
-    "granulated",
-    "white",
-    "filtered",
-    "still",
-    "fine",
-    "coarse",
-    "ground",
-}
-
-# Ingredients assumed to already be in the user's kitchen (matched after
-# descriptor stripping, so "crushed ice" and "granulated sugar" count).
-_PANTRY_STAPLES = {
-    "ice",
-    "water",
-    "sugar",
-    "brown sugar",
-    "salt",
-    "sea salt",
-    "kosher salt",
-    "honey",
-    "black pepper",
-    "cinnamon",
-    "nutmeg",
-    "vanilla extract",
-}
+# Kept in sync with Settings.paneco_base_url; callers that have settings should
+# pass theirs, so the retailer stays configurable without threading config into
+# this otherwise dependency-free module.
+_DEFAULT_PANECO_BASE_URL = "https://www.paneco.co.il"
 
 # Approximate volume of one unit, in ml, for serving estimates.
 _UNIT_ML = {
@@ -107,16 +77,6 @@ _GROUP_ORDER = [
 ]
 
 
-def normalize_name(name: str) -> str:
-    words = name.lower().replace(",", " ").split()
-    kept = [w for w in words if w not in _DESCRIPTORS]
-    return " ".join(kept) if kept else name.lower().strip()
-
-
-def is_pantry_staple(name: str) -> bool:
-    return normalize_name(name) in _PANTRY_STAPLES
-
-
 def apply_staple_flags(recipe: Recipe) -> Recipe:
     """Override the LLM's staple guesses with our deterministic list."""
     for ingredient in recipe.ingredients:
@@ -165,7 +125,7 @@ def _suggested_purchase(ingredient: Ingredient) -> str:
             return f"Small bottle or pack of {name}"
 
 
-def build_buy_list(recipe: Recipe) -> BuyList:
+def build_buy_list(recipe: Recipe, paneco_base_url: str = _DEFAULT_PANECO_BASE_URL) -> BuyList:
     staples: list[str] = []
     by_category: dict[IngredientCategory, list[BuyListItem]] = {}
     seen: set[str] = set()
@@ -180,11 +140,14 @@ def build_buy_list(recipe: Recipe) -> BuyList:
             staples.append(ingredient.name)
             continue
 
+        link = paneco.link_for(ingredient.name, ingredient.category, paneco_base_url)
         item = BuyListItem(
             ingredient_name=ingredient.name,
             category=ingredient.category,
             suggested_purchase=_suggested_purchase(ingredient),
             est_servings=_estimate_servings(ingredient),
+            paneco_query=link[0] if link else None,
+            paneco_url=link[1] if link else None,
         )
         by_category.setdefault(ingredient.category, []).append(item)
 
@@ -193,4 +156,9 @@ def build_buy_list(recipe: Recipe) -> BuyList:
         for category in _GROUP_ORDER
         if category in by_category
     ]
-    return BuyList(groups=groups, staples_assumed=staples)
+    has_links = any(item.paneco_url for group in groups for item in group.items)
+    return BuyList(
+        groups=groups,
+        staples_assumed=staples,
+        paneco_sale_url=paneco.sale_url(paneco_base_url) if has_links else None,
+    )

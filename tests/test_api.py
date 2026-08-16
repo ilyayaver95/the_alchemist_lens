@@ -4,7 +4,7 @@ import pytest
 from fastapi.testclient import TestClient
 from PIL import Image
 
-from app.api.v1.routes import get_vision_provider
+from app.api.v1.routes import get_optional_vision_provider, get_vision_provider
 from app.config import Settings, get_settings
 from app.main import create_app
 from app.services.vision.fake import FakeProvider
@@ -27,6 +27,7 @@ def client(tmp_path):
     )
     app.dependency_overrides[get_settings] = lambda: test_settings
     app.dependency_overrides[get_vision_provider] = FakeProvider
+    app.dependency_overrides[get_optional_vision_provider] = FakeProvider
     with TestClient(app) as test_client:
         yield test_client
 
@@ -92,6 +93,67 @@ def test_missing_name_is_validation_error(client):
         files={"image": ("drink.jpg", make_image_bytes(), "image/jpeg")},
     )
     assert response.status_code == 422
+
+
+def test_analyze_includes_paneco_links(client):
+    body = client.post(
+        "/api/v1/analyze",
+        files={"image": ("drink.jpg", make_image_bytes(), "image/jpeg")},
+        data={"name": "Smoky Margarita"},
+    ).json()
+    spirits = next(g for g in body["buy_list"]["groups"] if g["label"] == "Spirits")
+    assert spirits["items"][0]["paneco_url"].startswith("https://www.paneco.co.il/catalogsearch/")
+    assert body["buy_list"]["paneco_sale_url"].endswith("/special-offers")
+
+
+class TestClassics:
+    def test_list(self, client):
+        body = client.get("/api/v1/classics").json()
+        assert len(body) >= 20
+        assert {"slug", "drink_name", "summary", "tags"} <= body[0].keys()
+
+    def test_detail_is_shaped_like_an_analysis(self, client):
+        body = client.get("/api/v1/classics/negroni").json()
+        assert body["recipe"]["drink_name"] == "Negroni"
+        assert body["provider"] == "library"
+        assert body["buy_list"]["groups"]
+
+    def test_unknown_slug(self, client):
+        assert client.get("/api/v1/classics/nonexistent").status_code == 404
+
+
+class TestPantry:
+    def test_scan_reads_the_shelf(self, client):
+        body = client.post(
+            "/api/v1/pantry/scan",
+            files={"image": ("shelf.jpg", make_image_bytes(), "image/jpeg")},
+            data={"hint": "kitchen counter"},
+        ).json()
+        assert [item["name"] for item in body["items"]]
+
+    def test_scan_rejects_non_images(self, client):
+        response = client.post(
+            "/api/v1/pantry/scan", files={"image": ("notes.txt", b"hello", "text/plain")}
+        )
+        assert response.status_code == 415
+
+    def test_suggest_matches_classics_without_an_llm(self, client):
+        body = client.post(
+            "/api/v1/pantry/suggest",
+            json={"items": ["gin", "Campari", "sweet vermouth"], "invent": False},
+        ).json()
+        assert "Negroni" in [m["drink_name"] for m in body["makeable"]]
+        assert body["invention"] is None
+
+    def test_suggest_can_also_invent(self, client):
+        body = client.post(
+            "/api/v1/pantry/suggest", json={"items": ["gin", "tonic water"], "invent": True}
+        ).json()
+        assert body["invention"]["recipe"]["drink_name"]
+        assert body["invention"]["buy_list"]["groups"]
+
+    def test_suggest_needs_at_least_one_item(self, client):
+        assert client.post("/api/v1/pantry/suggest", json={"items": []}).status_code == 422
 
 
 def test_openapi_docs_exposed(client):

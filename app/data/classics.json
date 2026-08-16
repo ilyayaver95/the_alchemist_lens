@@ -1,0 +1,577 @@
+[
+  {
+    "slug": "old-fashioned",
+    "tags": ["whiskey", "stirred", "spirit-forward", "iba"],
+    "recipe": {
+      "drink_name": "Old Fashioned",
+      "summary": "The original cocktail: good whiskey, a whisper of sugar, bitters, and a big piece of ice. Nothing to hide behind.",
+      "is_alcoholic": true,
+      "estimated_abv": 32.0,
+      "method": "stirred",
+      "glassware": "rocks glass",
+      "garnish": "expressed orange peel",
+      "ingredients": [
+        {"name": "bourbon", "amount": 2.0, "unit": "oz", "category": "spirit", "notes": "or rye for a drier, spicier drink"},
+        {"name": "simple syrup", "amount": 0.25, "unit": "oz", "category": "syrup", "notes": "or one sugar cube muddled with the bitters"},
+        {"name": "Angostura bitters", "amount": 2.0, "unit": "dash", "category": "other"},
+        {"name": "ice", "category": "pantry", "notes": "one large cube"},
+        {"name": "orange peel", "amount": 1.0, "unit": "piece", "category": "garnish"}
+      ],
+      "steps": [
+        "Add bourbon, simple syrup, and bitters to a mixing glass with ice.",
+        "Stir for about 30 seconds, until well chilled and slightly diluted.",
+        "Strain over one large cube in a rocks glass.",
+        "Express an orange peel over the surface, then drop it in."
+      ],
+      "visual_cues": [],
+      "confidence": "high"
+    }
+  },
+  {
+    "slug": "negroni",
+    "tags": ["gin", "stirred", "bitter", "aperitif", "iba"],
+    "recipe": {
+      "drink_name": "Negroni",
+      "summary": "Equal parts gin, Campari, and sweet vermouth — bracingly bitter, ruby red, and impossible to get wrong.",
+      "is_alcoholic": true,
+      "estimated_abv": 24.0,
+      "method": "stirred",
+      "glassware": "rocks glass",
+      "garnish": "orange slice or peel",
+      "ingredients": [
+        {"name": "gin", "amount": 1.0, "unit": "oz", "category": "spirit", "notes": "London dry"},
+        {"name": "Campari", "amount": 1.0, "unit": "oz", "category": "liqueur"},
+        {"name": "sweet vermouth", "amount": 1.0, "unit": "oz", "category": "wine"},
+        {"name": "ice", "category": "pantry"},
+        {"name": "orange peel", "amount": 1.0, "unit": "piece", "category": "garnish"}
+      ],
+      "steps": [
+        "Combine gin, Campari, and sweet vermouth in a mixing glass with ice.",
+        "Stir until well chilled, about 30 seconds.",
+        "Strain over fresh ice in a rocks glass.",
+        "Garnish with an orange peel."
+      ],
+      "visual_cues": [],
+      "confidence": "high"
+    }
+  },
+  {
+    "slug": "margarita",
+    "tags": ["tequila", "shaken", "sour", "citrus", "iba"],
+    "recipe": {
+      "drink_name": "Margarita",
+      "summary": "Tequila, orange liqueur, and lime in tight balance, with a salt rim to sharpen every sip.",
+      "is_alcoholic": true,
+      "estimated_abv": 22.0,
+      "method": "shaken",
+      "glassware": "coupe or rocks glass",
+      "garnish": "lime wheel and a half salt rim",
+      "ingredients": [
+        {"name": "blanco tequila", "amount": 2.0, "unit": "oz", "category": "spirit", "notes": "100% agave"},
+        {"name": "Cointreau", "amount": 1.0, "unit": "oz", "category": "liqueur", "notes": "or any decent triple sec"},
+        {"name": "lime juice", "amount": 0.75, "unit": "oz", "category": "juice", "notes": "freshly squeezed"},
+        {"name": "agave syrup", "amount": 0.25, "unit": "oz", "category": "syrup", "notes": "optional, to taste"},
+        {"name": "salt", "category": "pantry", "notes": "for the rim"},
+        {"name": "ice", "category": "pantry"},
+        {"name": "lime wheel", "amount": 1.0, "unit": "piece", "category": "garnish"}
+      ],
+      "steps": [
+        "Rub a lime wedge around half the glass rim and dip it in salt.",
+        "Shake tequila, Cointreau, lime juice, and agave with ice for 12 seconds.",
+        "Double-strain into the prepared glass, over fresh ice if serving on the rocks.",
+        "Garnish with a lime wheel."
+      ],
+      "visual_cues": [],
+      "confidence": "high"
+    }
+  },
+  {
+    "slug": "daiquiri",
+    "tags": ["rum", "shaken", "sour", "citrus", "iba"],
+    "recipe": {
+      "drink_name": "Daiquiri",
+      "summary": "Three ingredients, zero garnish, no place to hide. The benchmark every bartender is judged by.",
+      "is_alcoholic": true,
+      "estimated_abv": 21.0,
+      "method": "shaken",
+      "glassware": "coupe",
+      "garnish": "lime wheel (optional)",
+      "ingredients": [
+        {"name": "white rum", "amount": 2.0, "unit": "oz", "category": "spirit"},
+        {"name": "lime juice", "amount": 1.0, "unit": "oz", "category": "juice", "notes": "freshly squeezed"},
+        {"name": "simple syrup", "amount": 0.75, "unit": "oz", "category": "syrup"},
+        {"name": "ice", "category": "pantry"}
+      ],
+      "steps": [
+        "Chill a coupe glass.",
+        "Shake rum, lime juice, and simple syrup hard with ice for 12 seconds.",
+        "Double-strain into the chilled coupe.",
+        "Serve immediately — a Daiquiri waits for no one."
+      ],
+      "visual_cues": [],
+      "confidence": "high"
+    }
+  },
+  {
+    "slug": "mojito",
+    "tags": ["rum", "muddled", "refreshing", "long", "iba"],
+    "recipe": {
+      "drink_name": "Mojito",
+      "summary": "Rum, lime, and mint over crushed ice, lengthened with soda. The hot-afternoon default.",
+      "is_alcoholic": true,
+      "estimated_abv": 12.0,
+      "method": "muddled",
+      "glassware": "highball",
+      "garnish": "mint sprig and lime wheel",
+      "ingredients": [
+        {"name": "white rum", "amount": 2.0, "unit": "oz", "category": "spirit"},
+        {"name": "lime juice", "amount": 1.0, "unit": "oz", "category": "juice", "notes": "freshly squeezed"},
+        {"name": "simple syrup", "amount": 0.75, "unit": "oz", "category": "syrup"},
+        {"name": "mint", "amount": 10.0, "unit": "leaf", "category": "produce", "notes": "plus a sprig for garnish"},
+        {"name": "soda water", "amount": 2.0, "unit": "oz", "category": "mixer", "notes": "to top"},
+        {"name": "crushed ice", "category": "pantry"}
+      ],
+      "steps": [
+        "Gently press the mint leaves against the side of the glass with the syrup — bruise, don't shred.",
+        "Add rum and lime juice, then fill with crushed ice.",
+        "Churn with a barspoon to mix and chill.",
+        "Top with soda water and cap with more crushed ice.",
+        "Slap a mint sprig between your palms and lay it on top."
+      ],
+      "visual_cues": [],
+      "confidence": "high"
+    }
+  },
+  {
+    "slug": "manhattan",
+    "tags": ["whiskey", "stirred", "spirit-forward", "iba"],
+    "recipe": {
+      "drink_name": "Manhattan",
+      "summary": "Rye and sweet vermouth, stirred cold and served up. Darker and more contemplative than a Martini.",
+      "is_alcoholic": true,
+      "estimated_abv": 30.0,
+      "method": "stirred",
+      "glassware": "coupe",
+      "garnish": "brandied cherry",
+      "ingredients": [
+        {"name": "rye whiskey", "amount": 2.0, "unit": "oz", "category": "spirit", "notes": "bourbon works, sweeter"},
+        {"name": "sweet vermouth", "amount": 1.0, "unit": "oz", "category": "wine"},
+        {"name": "Angostura bitters", "amount": 2.0, "unit": "dash", "category": "other"},
+        {"name": "ice", "category": "pantry"},
+        {"name": "cocktail cherry", "amount": 1.0, "unit": "piece", "category": "garnish"}
+      ],
+      "steps": [
+        "Chill a coupe glass.",
+        "Stir rye, vermouth, and bitters with ice for 30 seconds.",
+        "Strain into the chilled coupe.",
+        "Drop in a cherry."
+      ],
+      "visual_cues": [],
+      "confidence": "high"
+    }
+  },
+  {
+    "slug": "dry-martini",
+    "tags": ["gin", "stirred", "spirit-forward", "classic", "iba"],
+    "recipe": {
+      "drink_name": "Dry Martini",
+      "summary": "Cold gin with just enough vermouth to give it a spine. Served bracingly cold and unapologetically strong.",
+      "is_alcoholic": true,
+      "estimated_abv": 30.0,
+      "method": "stirred",
+      "glassware": "martini glass or coupe",
+      "garnish": "lemon twist or olive",
+      "ingredients": [
+        {"name": "gin", "amount": 2.5, "unit": "oz", "category": "spirit", "notes": "London dry"},
+        {"name": "dry vermouth", "amount": 0.5, "unit": "oz", "category": "wine", "notes": "keep it refrigerated once opened"},
+        {"name": "orange bitters", "amount": 1.0, "unit": "dash", "category": "other", "notes": "optional"},
+        {"name": "ice", "category": "pantry"},
+        {"name": "lemon peel", "amount": 1.0, "unit": "piece", "category": "garnish"}
+      ],
+      "steps": [
+        "Freeze the glass — this drink lives or dies on temperature.",
+        "Stir gin, vermouth, and bitters with plenty of ice for 30 seconds.",
+        "Strain into the frozen glass.",
+        "Express a lemon peel over the top, or drop in an olive instead."
+      ],
+      "visual_cues": [],
+      "confidence": "high"
+    }
+  },
+  {
+    "slug": "espresso-martini",
+    "tags": ["vodka", "shaken", "coffee", "dessert", "modern-classic"],
+    "recipe": {
+      "drink_name": "Espresso Martini",
+      "summary": "Coffee and vodka shaken to a thick crema. Invented to wake you up and knock you down at once.",
+      "is_alcoholic": true,
+      "estimated_abv": 20.0,
+      "method": "shaken",
+      "glassware": "coupe",
+      "garnish": "three coffee beans",
+      "ingredients": [
+        {"name": "vodka", "amount": 2.0, "unit": "oz", "category": "spirit"},
+        {"name": "coffee liqueur", "amount": 1.0, "unit": "oz", "category": "liqueur", "notes": "Kahlúa or similar"},
+        {"name": "espresso", "amount": 1.0, "unit": "oz", "category": "other", "notes": "fresh and hot, brewed to order"},
+        {"name": "simple syrup", "amount": 0.25, "unit": "oz", "category": "syrup", "notes": "adjust to your coffee"},
+        {"name": "ice", "category": "pantry"},
+        {"name": "coffee beans", "amount": 3.0, "unit": "piece", "category": "garnish"}
+      ],
+      "steps": [
+        "Chill a coupe glass.",
+        "Pull a fresh shot of espresso — stale coffee will not foam.",
+        "Shake everything very hard with ice for 15 seconds.",
+        "Double-strain into the coupe and let the crema settle.",
+        "Float three coffee beans in the centre."
+      ],
+      "visual_cues": [],
+      "confidence": "high"
+    }
+  },
+  {
+    "slug": "whiskey-sour",
+    "tags": ["whiskey", "shaken", "sour", "foam", "iba"],
+    "recipe": {
+      "drink_name": "Whiskey Sour",
+      "summary": "Bourbon, lemon, and sugar with a silky egg-white cap. The template every sour is built from.",
+      "is_alcoholic": true,
+      "estimated_abv": 18.0,
+      "method": "shaken",
+      "glassware": "rocks glass or coupe",
+      "garnish": "Angostura dots on the foam",
+      "ingredients": [
+        {"name": "bourbon", "amount": 2.0, "unit": "oz", "category": "spirit"},
+        {"name": "lemon juice", "amount": 0.75, "unit": "oz", "category": "juice", "notes": "freshly squeezed"},
+        {"name": "simple syrup", "amount": 0.75, "unit": "oz", "category": "syrup"},
+        {"name": "egg white", "amount": 1.0, "unit": "piece", "category": "other", "notes": "optional; aquafaba works too"},
+        {"name": "Angostura bitters", "amount": 3.0, "unit": "dash", "category": "other", "notes": "on top, for aroma"},
+        {"name": "ice", "category": "pantry"}
+      ],
+      "steps": [
+        "Dry-shake bourbon, lemon, syrup, and egg white with no ice for 15 seconds to build the foam.",
+        "Add ice and shake again until cold.",
+        "Double-strain into a rocks glass over fresh ice, or serve up in a coupe.",
+        "Dot the foam with bitters and drag a pick through it."
+      ],
+      "visual_cues": [],
+      "confidence": "high"
+    }
+  },
+  {
+    "slug": "aperol-spritz",
+    "tags": ["aperitif", "built", "sparkling", "low-abv", "iba"],
+    "recipe": {
+      "drink_name": "Aperol Spritz",
+      "summary": "Three parts prosecco, two parts Aperol, one splash of soda. Sunset in a wine glass.",
+      "is_alcoholic": true,
+      "estimated_abv": 9.0,
+      "method": "built",
+      "glassware": "large wine glass",
+      "garnish": "orange slice",
+      "ingredients": [
+        {"name": "Aperol", "amount": 2.0, "unit": "oz", "category": "liqueur"},
+        {"name": "prosecco", "amount": 3.0, "unit": "oz", "category": "wine", "notes": "well chilled"},
+        {"name": "soda water", "amount": 1.0, "unit": "oz", "category": "mixer"},
+        {"name": "ice", "category": "pantry", "notes": "fill the glass"},
+        {"name": "orange slice", "amount": 1.0, "unit": "piece", "category": "garnish"}
+      ],
+      "steps": [
+        "Fill a large wine glass to the top with ice.",
+        "Pour in the prosecco first, then the Aperol — it keeps the bubbles alive.",
+        "Add a splash of soda water and stir once, gently.",
+        "Tuck in a fat orange slice."
+      ],
+      "visual_cues": [],
+      "confidence": "high"
+    }
+  },
+  {
+    "slug": "cosmopolitan",
+    "tags": ["vodka", "shaken", "sour", "citrus", "iba"],
+    "recipe": {
+      "drink_name": "Cosmopolitan",
+      "summary": "Citrus vodka, triple sec, lime, and just enough cranberry for the colour. Tart, pink, and far drier than its reputation.",
+      "is_alcoholic": true,
+      "estimated_abv": 20.0,
+      "method": "shaken",
+      "glassware": "martini glass",
+      "garnish": "flamed orange peel",
+      "ingredients": [
+        {"name": "citron vodka", "amount": 1.5, "unit": "oz", "category": "spirit", "notes": "plain vodka is fine"},
+        {"name": "Cointreau", "amount": 0.75, "unit": "oz", "category": "liqueur"},
+        {"name": "lime juice", "amount": 0.5, "unit": "oz", "category": "juice", "notes": "freshly squeezed"},
+        {"name": "cranberry juice", "amount": 0.75, "unit": "oz", "category": "juice"},
+        {"name": "ice", "category": "pantry"},
+        {"name": "orange peel", "amount": 1.0, "unit": "piece", "category": "garnish"}
+      ],
+      "steps": [
+        "Chill a martini glass.",
+        "Shake all liquid ingredients with ice for 12 seconds.",
+        "Double-strain into the chilled glass.",
+        "Express an orange peel over the surface and discard it."
+      ],
+      "visual_cues": [],
+      "confidence": "high"
+    }
+  },
+  {
+    "slug": "moscow-mule",
+    "tags": ["vodka", "built", "spicy", "long", "iba"],
+    "recipe": {
+      "drink_name": "Moscow Mule",
+      "summary": "Vodka and lime lengthened with fiery ginger beer, served in a copper mug that keeps it painfully cold.",
+      "is_alcoholic": true,
+      "estimated_abv": 10.0,
+      "method": "built",
+      "glassware": "copper mug or highball",
+      "garnish": "lime wedge and mint sprig",
+      "ingredients": [
+        {"name": "vodka", "amount": 2.0, "unit": "oz", "category": "spirit"},
+        {"name": "lime juice", "amount": 0.5, "unit": "oz", "category": "juice", "notes": "freshly squeezed"},
+        {"name": "ginger beer", "amount": 4.0, "unit": "oz", "category": "mixer", "notes": "spicy, not ginger ale"},
+        {"name": "ice", "category": "pantry"},
+        {"name": "lime wedge", "amount": 1.0, "unit": "piece", "category": "garnish"}
+      ],
+      "steps": [
+        "Fill a copper mug with ice.",
+        "Add vodka and lime juice.",
+        "Top with ginger beer and stir once.",
+        "Garnish with a lime wedge and a slapped mint sprig."
+      ],
+      "visual_cues": [],
+      "confidence": "high"
+    }
+  },
+  {
+    "slug": "gin-and-tonic",
+    "tags": ["gin", "built", "refreshing", "long", "two-ingredient"],
+    "recipe": {
+      "drink_name": "Gin & Tonic",
+      "summary": "Two ingredients and a lot of ice. Get the ratio and the temperature right and it beats most cocktails.",
+      "is_alcoholic": true,
+      "estimated_abv": 11.0,
+      "method": "built",
+      "glassware": "highball or copa glass",
+      "garnish": "lime wedge or a citrus peel",
+      "ingredients": [
+        {"name": "gin", "amount": 2.0, "unit": "oz", "category": "spirit"},
+        {"name": "tonic water", "amount": 4.0, "unit": "oz", "category": "mixer", "notes": "cold, from a fresh small bottle"},
+        {"name": "ice", "category": "pantry", "notes": "fill to the brim"},
+        {"name": "lime wedge", "amount": 1.0, "unit": "piece", "category": "garnish"}
+      ],
+      "steps": [
+        "Fill the glass completely with ice — a half-empty glass dilutes faster.",
+        "Pour the gin over the ice.",
+        "Pour the tonic down a barspoon to keep the carbonation.",
+        "Squeeze and drop in a lime wedge; stir once."
+      ],
+      "visual_cues": [],
+      "confidence": "high"
+    }
+  },
+  {
+    "slug": "mai-tai",
+    "tags": ["rum", "shaken", "tiki", "tropical", "iba"],
+    "recipe": {
+      "drink_name": "Mai Tai",
+      "summary": "Two rums, orange curaçao, and almond orgeat over crushed ice. Tiki's most misunderstood drink — there is no pineapple in it.",
+      "is_alcoholic": true,
+      "estimated_abv": 22.0,
+      "method": "shaken",
+      "glassware": "rocks glass",
+      "garnish": "spent lime shell and mint sprig",
+      "ingredients": [
+        {"name": "aged rum", "amount": 1.0, "unit": "oz", "category": "spirit", "notes": "Jamaican, for funk"},
+        {"name": "white rum", "amount": 1.0, "unit": "oz", "category": "spirit"},
+        {"name": "orange curaçao", "amount": 0.5, "unit": "oz", "category": "liqueur"},
+        {"name": "orgeat syrup", "amount": 0.5, "unit": "oz", "category": "syrup", "notes": "almond syrup — the soul of the drink"},
+        {"name": "lime juice", "amount": 1.0, "unit": "oz", "category": "juice", "notes": "keep the spent shell"},
+        {"name": "crushed ice", "category": "pantry"},
+        {"name": "mint", "amount": 1.0, "unit": "sprig", "category": "garnish"}
+      ],
+      "steps": [
+        "Shake both rums, curaçao, orgeat, and lime juice with a little crushed ice for 8 seconds.",
+        "Pour unstrained into a rocks glass and top with more crushed ice.",
+        "Float the spent lime shell on top like a small green island.",
+        "Plant a mint sprig beside it."
+      ],
+      "visual_cues": [],
+      "confidence": "high"
+    }
+  },
+  {
+    "slug": "pina-colada",
+    "tags": ["rum", "blended", "tiki", "tropical", "creamy", "iba"],
+    "recipe": {
+      "drink_name": "Piña Colada",
+      "summary": "Rum, pineapple, and coconut cream blended smooth. Puerto Rico's national drink and an unrepentant dessert.",
+      "is_alcoholic": true,
+      "estimated_abv": 11.0,
+      "method": "blended",
+      "glassware": "hurricane glass",
+      "garnish": "pineapple wedge and a cherry",
+      "ingredients": [
+        {"name": "white rum", "amount": 2.0, "unit": "oz", "category": "spirit"},
+        {"name": "pineapple juice", "amount": 3.0, "unit": "oz", "category": "juice"},
+        {"name": "coconut cream", "amount": 1.0, "unit": "oz", "category": "other", "notes": "Coco López or similar — not coconut milk"},
+        {"name": "lime juice", "amount": 0.5, "unit": "oz", "category": "juice", "notes": "cuts the sweetness"},
+        {"name": "crushed ice", "category": "pantry", "notes": "about one cup"},
+        {"name": "pineapple wedge", "amount": 1.0, "unit": "piece", "category": "garnish"}
+      ],
+      "steps": [
+        "Blend rum, pineapple juice, coconut cream, lime juice, and a cup of crushed ice until smooth.",
+        "Pour into a hurricane glass.",
+        "Garnish with a pineapple wedge and a cherry.",
+        "Serve with a wide straw."
+      ],
+      "visual_cues": [],
+      "confidence": "high"
+    }
+  },
+  {
+    "slug": "caipirinha",
+    "tags": ["cachaça", "muddled", "sour", "brazilian", "iba"],
+    "recipe": {
+      "drink_name": "Caipirinha",
+      "summary": "Cachaça muddled with whole lime and sugar. Rustic, grassy, and stronger than it tastes.",
+      "is_alcoholic": true,
+      "estimated_abv": 20.0,
+      "method": "muddled",
+      "glassware": "rocks glass",
+      "garnish": "lime wheel",
+      "ingredients": [
+        {"name": "cachaça", "amount": 2.0, "unit": "oz", "category": "spirit"},
+        {"name": "lime", "amount": 1.0, "unit": "piece", "category": "produce", "notes": "cut into eighths"},
+        {"name": "sugar", "amount": 2.0, "unit": "tsp", "category": "pantry", "notes": "white, granulated"},
+        {"name": "crushed ice", "category": "pantry"}
+      ],
+      "steps": [
+        "Cut the lime into eighths and drop them into the glass with the sugar.",
+        "Muddle firmly enough to release the oils from the peel, but stop before it turns bitter.",
+        "Fill with crushed ice and pour in the cachaça.",
+        "Churn with a barspoon until the glass frosts."
+      ],
+      "visual_cues": [],
+      "confidence": "high"
+    }
+  },
+  {
+    "slug": "bloody-mary",
+    "tags": ["vodka", "built", "savoury", "brunch", "iba"],
+    "recipe": {
+      "drink_name": "Bloody Mary",
+      "summary": "Tomato juice, vodka, and a whole spice cabinet. The only cocktail that counts as a meal.",
+      "is_alcoholic": true,
+      "estimated_abv": 8.0,
+      "method": "built",
+      "glassware": "highball",
+      "garnish": "celery stalk, lemon wedge, olives",
+      "ingredients": [
+        {"name": "vodka", "amount": 1.5, "unit": "oz", "category": "spirit"},
+        {"name": "tomato juice", "amount": 3.0, "unit": "oz", "category": "juice"},
+        {"name": "lemon juice", "amount": 0.5, "unit": "oz", "category": "juice", "notes": "freshly squeezed"},
+        {"name": "Worcestershire sauce", "amount": 3.0, "unit": "dash", "category": "other"},
+        {"name": "hot sauce", "amount": 3.0, "unit": "dash", "category": "other", "notes": "Tabasco or similar"},
+        {"name": "black pepper", "category": "pantry", "notes": "freshly ground"},
+        {"name": "salt", "category": "pantry", "notes": "celery salt if you have it"},
+        {"name": "ice", "category": "pantry"},
+        {"name": "celery stalk", "amount": 1.0, "unit": "piece", "category": "garnish"}
+      ],
+      "steps": [
+        "Build everything over ice in a highball glass.",
+        "Roll the drink between two glasses instead of shaking — shaking makes it frothy and dull.",
+        "Taste and adjust salt, pepper, and heat.",
+        "Garnish with a celery stalk and a lemon wedge."
+      ],
+      "visual_cues": [],
+      "confidence": "high"
+    }
+  },
+  {
+    "slug": "paloma",
+    "tags": ["tequila", "built", "refreshing", "long", "mexican"],
+    "recipe": {
+      "drink_name": "Paloma",
+      "summary": "Tequila and grapefruit soda with a pinch of salt. Mexico drinks far more of these than Margaritas.",
+      "is_alcoholic": true,
+      "estimated_abv": 10.0,
+      "method": "built",
+      "glassware": "highball",
+      "garnish": "grapefruit wedge and a salt rim",
+      "ingredients": [
+        {"name": "blanco tequila", "amount": 2.0, "unit": "oz", "category": "spirit"},
+        {"name": "lime juice", "amount": 0.5, "unit": "oz", "category": "juice", "notes": "freshly squeezed"},
+        {"name": "grapefruit soda", "amount": 4.0, "unit": "oz", "category": "mixer", "notes": "Squirt, Jarritos, or fresh grapefruit juice plus soda"},
+        {"name": "salt", "category": "pantry", "notes": "a pinch in the drink and on the rim"},
+        {"name": "ice", "category": "pantry"},
+        {"name": "grapefruit wedge", "amount": 1.0, "unit": "piece", "category": "garnish"}
+      ],
+      "steps": [
+        "Salt the rim of a highball glass and fill it with ice.",
+        "Add tequila, lime juice, and a small pinch of salt.",
+        "Top with grapefruit soda and stir once.",
+        "Garnish with a grapefruit wedge."
+      ],
+      "visual_cues": [],
+      "confidence": "high"
+    }
+  },
+  {
+    "slug": "french-75",
+    "tags": ["gin", "shaken", "sparkling", "celebration", "iba"],
+    "recipe": {
+      "drink_name": "French 75",
+      "summary": "Gin sour topped with champagne, named after a field gun for reasons that become obvious after two.",
+      "is_alcoholic": true,
+      "estimated_abv": 16.0,
+      "method": "shaken",
+      "glassware": "flute",
+      "garnish": "long lemon twist",
+      "ingredients": [
+        {"name": "gin", "amount": 1.0, "unit": "oz", "category": "spirit"},
+        {"name": "lemon juice", "amount": 0.5, "unit": "oz", "category": "juice", "notes": "freshly squeezed"},
+        {"name": "simple syrup", "amount": 0.5, "unit": "oz", "category": "syrup"},
+        {"name": "champagne", "amount": 3.0, "unit": "oz", "category": "wine", "notes": "or any dry sparkling wine, very cold"},
+        {"name": "ice", "category": "pantry"},
+        {"name": "lemon peel", "amount": 1.0, "unit": "piece", "category": "garnish"}
+      ],
+      "steps": [
+        "Shake gin, lemon juice, and simple syrup with ice for 10 seconds.",
+        "Strain into a chilled flute.",
+        "Top slowly with cold champagne so the foam settles.",
+        "Drape a long lemon twist over the rim."
+      ],
+      "visual_cues": [],
+      "confidence": "high"
+    }
+  },
+  {
+    "slug": "tom-collins",
+    "tags": ["gin", "built", "sour", "long", "refreshing", "iba"],
+    "recipe": {
+      "drink_name": "Tom Collins",
+      "summary": "A gin sour stretched with soda over ice — essentially a spiked, grown-up lemonade.",
+      "is_alcoholic": true,
+      "estimated_abv": 10.0,
+      "method": "built",
+      "glassware": "collins glass",
+      "garnish": "lemon wheel and a cherry",
+      "ingredients": [
+        {"name": "gin", "amount": 2.0, "unit": "oz", "category": "spirit"},
+        {"name": "lemon juice", "amount": 1.0, "unit": "oz", "category": "juice", "notes": "freshly squeezed"},
+        {"name": "simple syrup", "amount": 0.5, "unit": "oz", "category": "syrup"},
+        {"name": "soda water", "amount": 3.0, "unit": "oz", "category": "mixer", "notes": "to top"},
+        {"name": "ice", "category": "pantry"},
+        {"name": "lemon wheel", "amount": 1.0, "unit": "piece", "category": "garnish"}
+      ],
+      "steps": [
+        "Add gin, lemon juice, and syrup to a collins glass.",
+        "Fill with ice and stir briefly to chill.",
+        "Top with soda water.",
+        "Garnish with a lemon wheel and a cherry."
+      ],
+      "visual_cues": [],
+      "confidence": "high"
+    }
+  }
+]

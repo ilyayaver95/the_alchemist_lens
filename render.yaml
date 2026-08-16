@@ -1,3 +1,9 @@
+databases:
+  - name: menu-alchemist-db
+    plan: free
+    databaseName: menu_alchemist
+    user: menu_alchemist
+
 services:
   - type: web
     name: menu-alchemist
@@ -13,3 +19,11 @@ services:
         value: gemini
       - key: GEMINI_API_KEY
         sync: false  # set in the Render dashboard, never in git
+      - key: DATABASE_URL
+        fromDatabase:
+          name: menu-alchemist-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true  # rotating this signs everyone out; that's the only cost
+      - key: COOKIE_SECURE
+        value: true  # Render serves over HTTPS, so the session cookie must be Secure
