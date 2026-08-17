@@ -3,6 +3,8 @@
    The backend writes its HTTPException details as user-facing copy, so the
    error message thrown here is safe to show in a toast verbatim. */
 
+import { reportReachable, reportUnreachable } from "./connection.js";
+
 const BASE = "/api/v1";
 
 function detailOf(body, status) {
@@ -24,11 +26,15 @@ async function request(path, options = {}) {
   try {
     res = await fetch(`${BASE}${path}`, { credentials: "same-origin", ...options });
   } catch (cause) {
+    reportUnreachable();
     const error = new Error(OFFLINE_MESSAGE);
     error.status = 0;
     error.cause = cause;
     throw error;
   }
+  // Any response at all means the server answered; a 401 or 503 is still a
+  // conversation, and only a failed fetch means it is gone.
+  reportReachable();
   if (res.status === 204) return null;
   const body = await res.json().catch(() => null);
   if (!res.ok) {
