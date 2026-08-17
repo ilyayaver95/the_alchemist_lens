@@ -9,6 +9,7 @@ import { initAuth, openAuth } from "./views/auth.js";
 import { initBar, showBar } from "./views/bar.js";
 import { initClassics, showClassics } from "./views/classics.js";
 import { initFavorites, showFavorites } from "./views/favorites.js";
+import { initTutorial } from "./views/tutorial.js";
 
 const VIEWS = ["analyze", "classics", "bar", "favorites"];
 
@@ -51,6 +52,7 @@ function initConnectionBanner() {
 const options = { onAuthRequired: openAuth };
 
 initConnectionBanner();
+initTutorial();
 initAuth();
 initAnalyze(options);
 initClassics(options);
