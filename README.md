@@ -148,13 +148,43 @@ dead links. The URLs point at Paneco's Magento search
 (`/catalogsearch/result/?q=…&product_list_order=price&product_list_dir=asc`),
 and `BuyList.paneco_sale_url` points at `/special-offers`.
 
-**Nothing is scraped.** Paneco's `robots.txt` disallows `/catalogsearch/` and
-every query-string URL, and the origin rejects non-browser clients — so the
-server only ever composes links, and the search runs in the user's own browser
-when they tap one. `app/services/paneco.py` holds the term table, which mixes
-the store's own Hebrew category words (ג'ין, וודקה, רום) with English brand
-names; both are indexed by their search. That table is the part most likely to
-need occasional attention.
+Link building itself reads nothing: `app/services/paneco.py` is pure functions
+over a term table mixing the store's own Hebrew category words (ג'ין, וודקה,
+רום) with English brand names, both of which their search indexes. That table
+is the part most likely to need occasional attention.
+
+### Sale badges
+
+`app/services/paneco_sales.py` is the one component that *reads* Paneco, so
+that a buy list can say which bottles are discounted. Its constraints are
+deliberate:
+
+- **Plain paths only.** Category pages (`/gin`, `/whiskey`, `/liqueur`, …) and
+  `/special-offers`. Their `robots.txt` disallows `/catalogsearch/` and every
+  query-string URL, so nothing here paginates, sorts or searches — which caps
+  us at the first page of each category.
+- **Browser headers**, because the origin returns 403 to non-browser clients.
+  A deliberate choice, not an accident.
+- **Fetched once, cached for `PANECO_SALES_TTL_HOURS`** (default 12) across all
+  categories at once — never per ingredient, and never a partial index, since a
+  partial one would be cached and then answer "no discount" for every later drink.
+- **Fails soft.** No sale data means no badges; links, buy list and recipe are
+  unaffected. `PANECO_SALES_ENABLED=false` turns it back into a pure link builder.
+
+Two rules keep the badges honest:
+
+1. **Only positive claims.** No badge means we found no discount in the slice we
+   read — never that the bottle is full price.
+2. **Attribution before assertion.** Sitting on a dedicated category page is
+   proof enough for gin or rum, but a dozen families share `/liqueur`, so there
+   a product must name itself (`קמפרי` → Campari). Otherwise Campari would
+   inherit a discount on banana liqueur for sharing a shelf.
+
+The badge shows the **deepest discount**, not the lowest price — the cheapest
+discounted bottle is usually a 50 ml miniature, which those are filtered out
+anyway. Within a category the match is family-level, so a tequila badge may name
+an añejo when you asked for blanco; the product name is always shown so the
+reader can judge.
 
 ## Use it on your iPhone (PWA)
 
@@ -192,20 +222,26 @@ loading state covers this.
 .venv/bin/python -m pytest
 ```
 
-86 tests, no network and no API key needed. They cover buy-list logic (staples,
+106 tests, no network and no API key needed. They cover buy-list logic (staples,
 grouping, package sizes, serving math, dedupe), ingredient families and
-brand-prefixed shelf names, home-bar matching, Paneco URL construction,
-image preparation, caching, rate-limit retry, auth and per-user favorite
-isolation, and every endpoint end-to-end via the fake provider.
+brand-prefixed shelf names, home-bar matching, Paneco URL construction, sale
+parsing and attribution, image preparation, caching, rate-limit retry, auth and
+per-user favorite isolation, and every endpoint end-to-end via the fake provider.
+
+Sale parsing is tested against `tests/fixtures/paneco_sale_page.html`, real
+markup captured from a listing page, so the parser is pinned to what the site
+actually emits rather than to a hand-written imitation of it.
 
 `tests/conftest.py` points `DATABASE_URL` at a temp file before the app is
-imported, so running the suite never touches your dev database.
+imported and sets `PANECO_SALES_ENABLED=false`, so running the suite touches
+neither your dev database nor the network.
 
 ## Configuration
 
 All settings come from environment variables / `.env` (see `.env.example`):
 provider selection, Gemini/Ollama model names, cache location, upload limits,
-`DATABASE_URL`, `JWT_SECRET`, `COOKIE_SECURE`, `PANECO_BASE_URL`, and
-`ENABLE_INVENTION`. Secrets are never committed — `.env` is gitignored. Startup
-fails fast if `COOKIE_SECURE=true` while `JWT_SECRET` is still the dev default,
-since a guessable signing key would let anyone forge a session.
+`DATABASE_URL`, `JWT_SECRET`, `COOKIE_SECURE`, `PANECO_BASE_URL`,
+`PANECO_SALES_ENABLED`, `PANECO_SALES_TTL_HOURS`, and `ENABLE_INVENTION`.
+Secrets are never committed — `.env` is gitignored. Startup fails fast if
+`COOKIE_SECURE=true` while `JWT_SECRET` is still the dev default, since a
+guessable signing key would let anyone forge a session.

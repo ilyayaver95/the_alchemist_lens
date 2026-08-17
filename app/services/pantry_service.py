@@ -8,6 +8,7 @@ from app.models.responses import AnalyzeResponse
 from app.services.buy_list import apply_staple_flags, build_buy_list
 from app.services.llm_retry import with_rate_limit_retry
 from app.services.pantry import match_classics
+from app.services.paneco_sales import decorate_with_sales
 from app.services.recipe_service import prepare_image
 from app.services.vision.base import (
     ProviderNotConfiguredError,
@@ -66,9 +67,12 @@ class PantryService:
             return None
 
         recipe = apply_staple_flags(recipe)
+        buy_list = await decorate_with_sales(
+            build_buy_list(recipe, self._settings.paneco_base_url), self._settings
+        )
         return AnalyzeResponse(
             recipe=recipe,
-            buy_list=build_buy_list(recipe, self._settings.paneco_base_url),
+            buy_list=buy_list,
             provider=provider.name,
             model=provider.model,
         )

@@ -27,19 +27,38 @@ export function panecoSection(buyList) {
     cta.classList.toggle("open", opening);
   });
 
+  const discounted = items.filter((i) => i.sale).length;
   panel.append(
     el(
       "p",
       "paneco-note",
-      "Each link opens a Paneco search for that bottle, cheapest first — sale prices show up right in the results."
+      discounted
+        ? `${discounted} of these are on sale right now. Each link opens that bottle's Paneco search, cheapest first.`
+        : "Each link opens a Paneco search for that bottle, cheapest first — sale prices show up right in the results."
     )
   );
+
+  const shekels = (n) => `₪${Number.isInteger(n) ? n : n.toFixed(2)}`;
 
   items.forEach((item) => {
     const row = el("div", "paneco-row");
     const text = el("div", "paneco-text");
     text.append(el("span", "paneco-name", item.ingredient_name));
-    text.append(el("span", "paneco-query", `searches “${item.paneco_query}”`));
+
+    if (item.sale) {
+      const { product_name: name, price, sale_price: salePrice, also_on_sale: more } = item.sale;
+      const off = Math.round((1 - salePrice / price) * 100);
+      const line = el("span", "paneco-sale-line");
+      line.append(el("span", "sale-badge", `${off}% off`));
+      line.append(el("span", "sale-product", name));
+      line.append(el("span", "sale-price", shekels(salePrice)));
+      line.append(el("span", "sale-was", shekels(price)));
+      if (more > 0) line.append(el("span", "sale-more", `+${more} more on sale`));
+      text.append(line);
+    } else {
+      text.append(el("span", "paneco-query", `searches “${item.paneco_query}”`));
+    }
+
     row.append(text, externalLink(item.paneco_url, "Find ↗", "paneco-link"));
     panel.append(row);
   });

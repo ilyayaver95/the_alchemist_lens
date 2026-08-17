@@ -516,6 +516,35 @@ main {
 .paneco-name { font-weight: 600; font-size: 0.92rem; }
 .paneco-query { font-size: 0.78rem; color: var(--ink-faint); }
 
+.paneco-sale-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  margin-top: 0.1rem;
+}
+
+.sale-badge {
+  font-weight: 700;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #1d2e21;
+  background: var(--green);
+  border-radius: 5px;
+  padding: 0.05rem 0.35rem;
+}
+
+.sale-product { color: var(--ink-dim); }
+.sale-price { color: var(--green); font-weight: 600; font-variant-numeric: tabular-nums; }
+.sale-was {
+  color: var(--ink-faint);
+  text-decoration: line-through;
+  font-variant-numeric: tabular-nums;
+}
+.sale-more { color: var(--ink-faint); }
+
 .paneco-link {
   flex-shrink: 0;
   text-decoration: none;

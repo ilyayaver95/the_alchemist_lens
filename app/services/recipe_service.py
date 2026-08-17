@@ -9,6 +9,7 @@ from app.config import Settings
 from app.models.responses import AnalyzeResponse
 from app.services.buy_list import apply_staple_flags, build_buy_list
 from app.services.llm_retry import with_rate_limit_retry
+from app.services.paneco_sales import decorate_with_sales
 from app.services.vision.base import VisionProvider, VisionProviderError
 
 logger = logging.getLogger(__name__)
@@ -81,9 +82,12 @@ class RecipeService:
             self._provider.name,
         )
         recipe = apply_staple_flags(recipe)
+        buy_list = await decorate_with_sales(
+            build_buy_list(recipe, self._settings.paneco_base_url), self._settings
+        )
         response = AnalyzeResponse(
             recipe=recipe,
-            buy_list=build_buy_list(recipe, self._settings.paneco_base_url),
+            buy_list=buy_list,
             provider=self._provider.name,
             model=self._provider.model,
             cached=False,

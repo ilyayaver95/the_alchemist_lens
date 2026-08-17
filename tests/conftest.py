@@ -12,3 +12,6 @@ _TMP_DIR = tempfile.mkdtemp(prefix="alchemist-tests-")
 os.environ.setdefault("DATABASE_URL", f"sqlite:///{_TMP_DIR}/test.db")
 os.environ.setdefault("VISION_PROVIDER", "fake")
 os.environ.setdefault("JWT_SECRET", "test-secret")
+# Sale badges are the one feature that reaches out to Paneco. The suite must
+# never touch the network, so it is off unless a test opts in explicitly.
+os.environ.setdefault("PANECO_SALES_ENABLED", "false")
