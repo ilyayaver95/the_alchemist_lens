@@ -829,6 +829,40 @@ main {
   z-index: 30;
 }
 
+/* ---------- Offline banner ---------- */
+.offline-banner {
+  position: sticky;
+  top: 0;
+  z-index: 25;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem 1rem;
+  padding: calc(0.6rem + env(safe-area-inset-top)) 1rem 0.6rem;
+  background: #3a1f1a;
+  border-bottom: 1px solid var(--red);
+  color: #f2c4bb;
+  font-size: 0.86rem;
+  text-align: center;
+}
+
+.offline-text { max-width: 46rem; }
+
+.offline-retry {
+  flex-shrink: 0;
+  background: none;
+  border: 1px solid var(--red);
+  color: #f2c4bb;
+  font: 600 0.8rem var(--font-body);
+  padding: 0.3rem 0.9rem;
+  border-radius: 99px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.offline-retry:hover:not(:disabled) { background: rgba(217, 127, 111, 0.18); }
+.offline-retry:disabled { opacity: 0.6; cursor: wait; }
+
 .toast-ok {
   background: #1f2e22;
   border-color: var(--green);

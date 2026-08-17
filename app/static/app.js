@@ -1,8 +1,9 @@
 /* Entry point: wire the views to the router, load the session, register the SW. */
 
+import { checkConnection, isReachable, subscribeToConnection } from "./connection.js";
 import { refresh, startRouter } from "./router.js";
 import { loadSession, subscribe } from "./state.js";
-import { $ } from "./ui.js";
+import { $, show, showToast } from "./ui.js";
 import { initAnalyze, showAnalyze } from "./views/analyze.js";
 import { initAuth, openAuth } from "./views/auth.js";
 import { initBar, showBar } from "./views/bar.js";
@@ -19,8 +20,37 @@ function activate(name) {
   });
 }
 
+/* Connection banner. Every API call reports what it saw, so this stays honest
+   without polling; the explicit checks are only for the retry button and for
+   the browser telling us the network came back. */
+function initConnectionBanner() {
+  const banner = $("offline-banner");
+  const retry = $("offline-retry");
+
+  subscribeToConnection((reachable) => show(banner, !reachable));
+
+  retry.addEventListener("click", async () => {
+    retry.disabled = true;
+    retry.textContent = "Checking…";
+    const reachable = await checkConnection();
+    retry.disabled = false;
+    retry.textContent = "Retry";
+    if (reachable) {
+      showToast("Back online.", "ok");
+      // The session and whatever screen is open were both resolved against a
+      // server that wasn't answering — redo them now that one is.
+      await loadSession();
+      refresh();
+    }
+  });
+
+  window.addEventListener("online", checkConnection);
+  show(banner, !isReachable());
+}
+
 const options = { onAuthRequired: openAuth };
 
+initConnectionBanner();
 initAuth();
 initAnalyze(options);
 initClassics(options);

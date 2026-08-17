@@ -1,6 +1,6 @@
 /* Network-first service worker: always prefer fresh content, fall back to
    cache so the app shell still opens offline. API calls are never cached. */
-const CACHE = "menu-alchemist-v2";
+const CACHE = "menu-alchemist-v3";
 const SHELL = [
   "/",
   "/styles.css",
@@ -8,6 +8,7 @@ const SHELL = [
   "/icons/icon-192.png",
   "/app.js",
   "/api.js",
+  "/connection.js",
   "/paneco.js",
   "/photo-picker.js",
   "/render.js",

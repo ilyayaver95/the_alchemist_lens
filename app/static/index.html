@@ -19,6 +19,16 @@
 <body>
   <div class="backdrop" aria-hidden="true"></div>
 
+  <!-- Shown when the API can't be reached. The service worker keeps serving
+       this page either way, so without it a dead backend looks like a healthy
+       app until you tap something. -->
+  <div class="offline-banner hidden" id="offline-banner" role="status" aria-live="polite">
+    <span class="offline-text">
+      Can’t reach the server — you’re looking at a cached copy, so nothing you do here will save.
+    </span>
+    <button type="button" class="offline-retry" id="offline-retry">Retry</button>
+  </div>
+
   <header class="site-header">
     <div class="header-top">
       <div class="brand">
@@ -132,5 +142,6 @@
   <div class="toast hidden" id="toast" role="alert"></div>
 
   <script type="module" src="/app.js"></script>
+
 </body>
 </html>
