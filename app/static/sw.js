@@ -1,6 +1,6 @@
 /* Network-first service worker: always prefer fresh content, fall back to
    cache so the app shell still opens offline. API calls are never cached. */
-const CACHE = "menu-alchemist-v3";
+const CACHE = "menu-alchemist-v4";
 const SHELL = [
   "/",
   "/styles.css",
@@ -20,6 +20,7 @@ const SHELL = [
   "/views/bar.js",
   "/views/classics.js",
   "/views/favorites.js",
+  "/views/tutorial.js",
 ];
 
 self.addEventListener("install", (event) => {

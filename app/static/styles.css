@@ -49,13 +49,35 @@ body {
   align-items: center;
 }
 
-.auth-chip {
+.header-actions {
   position: absolute;
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
 }
+
+.auth-chip { font-size: 0.85rem; }
+
+.how-btn {
+  flex-shrink: 0;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--ink-dim);
+  font: 500 0.8rem var(--font-body);
+  padding: 0.28rem 0.75rem;
+  border-radius: 99px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.how-btn:hover {
+  color: var(--gold-bright);
+  border-color: var(--gold);
+  background: rgba(216, 168, 86, 0.06);
+}
+.how-btn span { color: var(--gold); font-weight: 700; }
 
 .auth-user { display: flex; align-items: center; gap: 0.6rem; }
 .auth-email-label {
@@ -80,7 +102,7 @@ body {
 
 @media (max-width: 620px) {
   .header-top { flex-direction: column; gap: 0.6rem; }
-  .auth-chip { position: static; transform: none; }
+  .header-actions { position: static; transform: none; }
 }
 
 .brand {
@@ -828,6 +850,83 @@ main {
 }
 
 .auth-switch { display: block; margin: 1rem auto 0; }
+
+/* ---------- How it works ---------- */
+.tutorial-card { position: relative; width: min(500px, 100%); text-align: center; }
+
+.tutorial-icon {
+  font-size: 2.6rem;
+  filter: drop-shadow(0 0 14px rgba(216, 168, 86, 0.4));
+}
+
+.tutorial-card h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--gold-bright);
+  margin-top: 0.5rem;
+}
+
+.tutorial-body {
+  color: var(--ink);
+  font-size: 0.95rem;
+  margin-top: 0.7rem;
+}
+
+.tutorial-detail {
+  color: var(--ink-dim);
+  font-size: 0.86rem;
+  margin-top: 0.7rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--border);
+}
+
+.tutorial-goto { margin-top: 1.1rem; }
+.tutorial-goto:empty { display: none; }
+
+.tutorial-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.6rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--border);
+}
+
+.tutorial-dots { display: flex; gap: 0.4rem; }
+
+.tutorial-dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: none;
+  border-radius: 99px;
+  background: var(--border-bright);
+  cursor: pointer;
+  transition: background 0.2s, width 0.2s;
+}
+.tutorial-dot:hover { background: var(--ink-faint); }
+.tutorial-dot.active { width: 20px; background: var(--gold); }
+
+.tutorial-step { font-size: 0.75rem; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+
+.tutorial-buttons { display: flex; gap: 0.5rem; }
+.tutorial-buttons .again-btn { padding: 0.5rem 1rem; }
+.tutorial-buttons .again-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+.tutorial-next {
+  border: none;
+  border-radius: 99px;
+  padding: 0.5rem 1.2rem;
+  font: 600 0.9rem var(--font-body);
+  color: #241a0c;
+  background: linear-gradient(120deg, var(--gold-bright), var(--gold));
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+.tutorial-next:hover { filter: brightness(1.06); }
 
 /* ---------- Misc ---------- */
 .again-btn {

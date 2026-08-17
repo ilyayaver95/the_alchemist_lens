@@ -35,7 +35,12 @@
         <span class="brand-mark">⚗️</span>
         <h1>Menu Alchemist</h1>
       </div>
-      <div class="auth-chip" id="auth-chip"></div>
+      <div class="header-actions">
+        <button type="button" class="how-btn" id="tutorial-open" aria-label="How this works">
+          <span aria-hidden="true">?</span> How it works
+        </button>
+        <div class="auth-chip" id="auth-chip"></div>
+      </div>
     </div>
     <p class="tagline">Point it at any drink on a menu — get the recipe and what to buy.</p>
 
@@ -117,6 +122,28 @@
       <div class="view-body" id="favorites-body"></div>
     </section>
   </main>
+
+  <!-- How it works -->
+  <div class="auth-modal hidden" id="tutorial-modal" role="dialog" aria-modal="true"
+       aria-labelledby="tutorial-title">
+    <div class="card tutorial-card">
+      <button type="button" class="clear-image auth-close" id="tutorial-close" aria-label="Close">✕</button>
+      <div class="tutorial-icon" id="tutorial-icon" aria-hidden="true">⚗️</div>
+      <h2 id="tutorial-title"></h2>
+      <p class="tutorial-body" id="tutorial-body"></p>
+      <p class="tutorial-detail" id="tutorial-detail"></p>
+      <div class="tutorial-goto" id="tutorial-goto"></div>
+
+      <div class="tutorial-nav">
+        <div class="tutorial-dots" id="tutorial-dots"></div>
+        <span class="tutorial-step" id="tutorial-step"></span>
+        <div class="tutorial-buttons">
+          <button type="button" class="again-btn" id="tutorial-back">Back</button>
+          <button type="button" class="tutorial-next" id="tutorial-next">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Auth -->
   <div class="auth-modal hidden" id="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-title">
