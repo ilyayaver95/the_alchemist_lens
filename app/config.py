@@ -42,6 +42,11 @@ class Settings(BaseSettings):
     # Retailer used for the "build bucket list" deep links.
     paneco_base_url: str = "https://www.paneco.co.il"
 
+    # Read Paneco's category and promotions pages to badge discounted bottles.
+    # Off turns the app back into a pure link builder that fetches nothing.
+    paneco_sales_enabled: bool = True
+    paneco_sales_ttl_hours: float = 12.0
+
     # Whether the home-bar screen may spend an LLM call inventing an original.
     enable_invention: bool = True
 

@@ -8,6 +8,7 @@ from app.models.pantry import PantryResponse, PantryScan, PantrySuggestRequest
 from app.models.responses import AnalyzeResponse, HealthResponse
 from app.services.buy_list import build_buy_list
 from app.services.classics import get_classic, list_classics
+from app.services.paneco_sales import decorate_with_sales
 from app.services.pantry_service import PantryService
 from app.services.recipe_service import InvalidImageError, RecipeService
 from app.services.vision.base import (
@@ -117,9 +118,12 @@ async def classic_detail(
         raise HTTPException(404, detail="No classic by that name — try the list.")
     # Shaped as an AnalyzeResponse so library drinks render, save, and link to
     # Paneco through exactly the same code as an analyzed photo.
+    buy_list = await decorate_with_sales(
+        build_buy_list(classic.recipe, settings.paneco_base_url), settings
+    )
     return AnalyzeResponse(
         recipe=classic.recipe,
-        buy_list=build_buy_list(classic.recipe, settings.paneco_base_url),
+        buy_list=buy_list,
         provider="library",
         model=CLASSICS_LIBRARY_VERSION,
     )
