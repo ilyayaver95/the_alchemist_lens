@@ -2,6 +2,15 @@
 
 Point it at any drink on a menu — get the likely recipe and a shopping list.
 
+<p align="center">
+  <a href="docs/menu-alchemist-demo.mp4">
+    <img src="docs/demo-thumbnail.jpg" width="520"
+         alt="Menu Alchemist demo: a menu photo becomes a recipe and a buy list">
+  </a>
+  <br>
+  <sub><a href="docs/menu-alchemist-demo.mp4"><b>▶ Watch the 60-second demo</b></a> — menu photo in, recipe and buy list out, then the classics library and the home-bar suggester.</sub>
+</p>
+
 Upload a photo of a drink (or of the menu itself), add the drink's name and menu
 description, and Menu Alchemist uses a vision-capable LLM to reconstruct a
 plausible recipe: ingredients with amounts, preparation steps, glassware,
